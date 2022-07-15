@@ -1,8 +1,8 @@
 ---
 global:
-  scrape_interval: 15s
-  evaluation_interval: 15s
-  scrape_timeout: 10s
+  scrape_interval: 40s
+  evaluation_interval: 40s
+  scrape_timeout: 35s
   external_labels:
     monitor: 'Alertmanager'
 
@@ -21,31 +21,6 @@ scrape_configs:
     scrape_timeout: 60s  # running speedtest needs time to complete
     static_configs:
       - targets: ['speedtest:9798']
-
-{% if shelly_plug_enable %}
-  - job_name: 'shelly-plug'
-    metrics_path: /metrics
-    scrape_interval: 1m
-    static_configs:
-      - targets: ['172.17.0.1:9924']
-{% endif %}
-
-{% if airgradient_enable %}
-{% for sensor in airgradient_sensors %}
-  - job_name: 'airgradient-{{ sensor.id }}'
-    metrics_path: /metrics
-    scrape_interval: 30s
-    static_configs:
-      - targets: ['{{ sensor.ip }}:{{ sensor.port }}']
-{% endfor %}
-{% endif %}
-
-{% if starlink_enable %}
-  - job_name: 'starlink'
-    metrics_path: /metrics
-    static_configs:
-      - targets: ['172.17.0.1:9817']
-{% endif %}
 
   - job_name: 'ping'
     metrics_path: /probe
