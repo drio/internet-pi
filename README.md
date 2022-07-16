@@ -1,5 +1,7 @@
 # Internet Pi (drio modifications)
 
+<img src="images/ipi.png" width="800px"/>
+
 These are my modifications on the Jeff's
 [internet-pi](https://github.com/geerlingguy/internet-pi) projects. Kudos to
 him for putting this together. I removed a few pieces that I don't use in my
