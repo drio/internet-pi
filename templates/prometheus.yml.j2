@@ -10,10 +10,66 @@ rule_files:
   - 'alert.rules'
 
 scrape_configs:
-  - job_name: 'prometheus'
+  - job_name: 'node_exporter_teewinot'
     scrape_interval: 5s
     static_configs:
       - targets: ['localhost:9090']
+
+  - job_name: 'node_exporter_pi4'
+    static_configs:
+          - targets: ['100.80.254.59:9100']
+    metric_relabel_configs:
+          - source_labels: [ instance ]
+            target_label: instance
+            action: replace
+            replacement: 'pi4'
+
+  - job_name: 'node_exporter_ironfist'
+    static_configs:
+          - targets: ['100.93.82.123:9100']
+    metric_relabel_configs:
+          - source_labels: [ instance ]
+            target_label: instance
+            action: replace
+            replacement: 'ironfist'
+
+  - job_name: 'node_exporter_gopher'
+    static_configs:
+          - targets: ['100.85.32.58:9100']
+    metric_relabel_configs:
+          - source_labels: [ instance ]
+            target_label: instance
+            action: replace
+            replacement: 'gopher'
+
+  - job_name: 'node_exporter_pi3'
+    static_configs:
+          - targets: ['100.115.153.45:9100']
+    metric_relabel_configs:
+          - source_labels: [ instance ]
+            target_label: instance
+            action: replace
+            replacement: 'pi3'
+
+  - job_name: 'node_exporter_teton'
+    static_configs:
+      - targets: ['100.71.191.27:9100']
+    metric_relabel_configs:
+          - source_labels: [ instance ]
+            target_label: instance
+            action: replace
+            replacement: 'teton'
+
+  - job_name: 'node_exporter_gabi'
+    static_configs:
+      - targets: ['100.111.16.85:9100']
+    metric_relabel_configs:
+          - source_labels: [ instance ]
+            target_label: instance
+            action: replace
+            replacement: 'gabi'
+
+# END exporters
 
   - job_name: 'speedtest'
     metrics_path: /metrics
