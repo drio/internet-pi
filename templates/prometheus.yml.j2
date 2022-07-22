@@ -13,7 +13,12 @@ scrape_configs:
   - job_name: 'node_exporter_teewinot'
     scrape_interval: 5s
     static_configs:
-      - targets: ['localhost:9090']
+          - targets: ['100.76.102.59:9100']
+    metric_relabel_configs:
+          - source_labels: [ instance ]
+            target_label: instance
+            action: replace
+            replacement: 'teewinot'
 
   - job_name: 'node_exporter_pi4'
     static_configs:
@@ -69,7 +74,7 @@ scrape_configs:
             action: replace
             replacement: 'gabi'
 
-# END exporters
+# END node exporters
 
   - job_name: 'speedtest'
     metrics_path: /metrics
@@ -100,6 +105,4 @@ scrape_configs:
       - target_label: __address__
         replacement: ping:9115  # The blackbox exporter's real hostname:port.
 
-  - job_name: 'nodeexp'
-    static_configs:
-      - targets: ['nodeexp:9100']
+
