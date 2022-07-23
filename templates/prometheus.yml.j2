@@ -58,7 +58,7 @@ scrape_configs:
 
   - job_name: 'node_exporter_teton'
     static_configs:
-      - targets: ['100.71.191.27:9100']
+      - targets: ['nodeexp:9100']
     metric_relabel_configs:
           - source_labels: [ instance ]
             target_label: instance
